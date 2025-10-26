@@ -1,11 +1,20 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
+import streamlit as st
 from config.settings import SCOPE, CREDENTIALS_FILE, SHEET_NAME, WORKOUT_TAB
+import os
+
+def getCredentials():
+    if os.path.exists(CREDENTIALS_FILE):
+        return ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, SCOPE)
+    else:
+        creds_dict = st.secrets["credentials"]
+        return ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, SCOPE)
 
 def get_worksheet():
     """Authorize and return the worksheet object."""
-    creds = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, SCOPE)
+    creds = getCredentials()
     client = gspread.authorize(creds)
     sheet = client.open(SHEET_NAME).worksheet(WORKOUT_TAB)
     return sheet
