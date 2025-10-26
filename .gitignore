@@ -1,0 +1,30 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# ---- Virtual Environment ----
+venv/
+.env/
+.envrc
+
+# ---- Credentials & Secrets ----
+credentials.json
+*.key
+*.pem
+*.env
+secrets.toml
+
+# ---- Streamlit Cache ----
+.streamlit/
+.cache/
+__pycache__/
+
+# ---- System / Editor Files ----
+.DS_Store
+.idea/
+.vscode/
+*.log
+
